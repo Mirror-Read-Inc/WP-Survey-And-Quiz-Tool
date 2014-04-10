@@ -169,7 +169,7 @@ class Wpsqt_Core {
 
 		global $blog_id;
 
-		$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+		$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();
 		$_SESSION = &$wp_session;
 		
 		$quizPath = ( isset($_SESSION['wpsqt']['item_id'])
