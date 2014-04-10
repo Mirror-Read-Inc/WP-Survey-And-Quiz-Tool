@@ -10,6 +10,8 @@
 					$question['answers'] = $answers;
 
 					// Store the order of the answers for review page
+					$wp_session = WP_Session::get_instance();
+					$_SESSION = &$wp_session;
 					$_SESSION['wpsqt'][$quizName]['sections'][$sectionKey]['questions'][$questionKey]['answers'] = $answers;
 				}
 			?>

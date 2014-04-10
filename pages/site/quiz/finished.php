@@ -4,6 +4,8 @@ require_once WPSQT_DIR.'/lib/Wpsqt/Tokens.php';
 $objTokens = Wpsqt_Tokens::getTokenObject();
 $objTokens->setDefaultValues();
 
+$wp_session = WP_Session::get_instance();
+$_SESSION = &$wp_session;
 ?>
 
 <h2 class="wpsqt-exam-finished-title"><?php _e('Exam Finished', 'wp-survey-and-quiz-tool'); ?></h2>

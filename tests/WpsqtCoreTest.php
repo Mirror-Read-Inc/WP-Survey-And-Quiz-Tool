@@ -22,6 +22,8 @@ class WpsqtCoreTest extends PHPUnit_Framework_TestCase {
 		$this->_customPagesDirectory = WPSQT_DIR.'pages/custom';
 	}
 	
+	protected $wp_session = WP_Session::get_instance();
+	
 	/**
 	 * Holds the location of the custom string directory. 
 	 * @var string
@@ -42,6 +44,8 @@ class WpsqtCoreTest extends PHPUnit_Framework_TestCase {
 	 * set properly.
 	 */
 	public function testCustomPagesFunctionalityWithCustomDirectoryPage(){
+		
+		$_SESSION = &$this->wp_session;
 		
 		//setUp
 		$_SESSION['wpsqt']['current_type'] = 'quiz';
@@ -66,6 +70,8 @@ class WpsqtCoreTest extends PHPUnit_Framework_TestCase {
 	 * fail if permissons aren't set properly. 
 	 */
 	public function testCustomPagesFunctionalityWithoutCustomDirectoryPageButWithShared(){
+		
+		$_SESSION = &$this->wp_session;
 		
 		//setUp	
 		$_SESSION['wpsqt']['current_type'] = 'quiz';

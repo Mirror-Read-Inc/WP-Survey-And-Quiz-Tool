@@ -1,3 +1,8 @@
+<?php
+$wp_session = WP_Session::get_instance();
+$_SESSION = &$wp_session;
+?>
+
 <div class="pre-content"></div>
 <div class="poll">
 

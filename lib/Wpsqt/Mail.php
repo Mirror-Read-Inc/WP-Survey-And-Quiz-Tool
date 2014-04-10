@@ -11,6 +11,8 @@ require_once WPSQT_DIR.'lib/Wpsqt/Tokens.php';
  */
 class Wpsqt_Mail {
 	
+	protected $wp_session = WP_Session::get_instance();
+	
 	/**
 	 * Sends the notification email to respondent
 	 *
@@ -18,6 +20,8 @@ class Wpsqt_Mail {
 	 */
 	private function _sendRespondentMail($address) {
 
+		$_SESSION = &$this->wp_session;
+		
 		$quizName = $_SESSION['wpsqt']['current_id'];
 		
 		$objTokens = Wpsqt_Tokens::getTokenObject();
@@ -59,6 +63,8 @@ class Wpsqt_Mail {
 	public static function sendMail(){
 	
 		global $wpdb;
+		
+		$_SESSION = &$this->wp_session;
 		
 		$quizName = $_SESSION['wpsqt']['current_id'];
 		

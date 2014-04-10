@@ -8,6 +8,9 @@
  * @license http://www.gnu.org/licenses/gpl.html GPL v3
  * @package WPSQT
  */
+ 
+$wp_session = WP_Session::get_instance();
+$_SESSION = &$wp_session;
 
 if (version_compare($oldVersion, '2.1') <= 0) {
 	$objUpgrade = new Wpsqt_Upgrade;

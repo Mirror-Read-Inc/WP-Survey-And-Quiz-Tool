@@ -1,3 +1,8 @@
+<?php
+$wp_session = WP_Session::get_instance();
+$_SESSION = &$wp_session;
+?>
+
 <div class="pre-content"></div>
 <div class="quiz">
 <h1><?php echo stripslashes($_SESSION['wpsqt'][$quizName]['sections'][$sectionKey]['name']); ?></h1>

@@ -12,6 +12,8 @@ class Wpsqt_Core {
 
 	protected $_pages = array();
 
+	protected $wp_session = WP_Session::get_instance();
+	
 	/**
 	 * Adds the generic hooks that are required throughout
 	 * the plugin.
@@ -83,6 +85,8 @@ class Wpsqt_Core {
 
 	public function init(){
 
+		$_SESSION = &$this->wp_session;
+		
 		apply_filters("wpsqt_init",$this);
 
 		if ( isset($_SESSION['wpsqt']) ) {
@@ -163,6 +167,8 @@ class Wpsqt_Core {
 
 		global $blog_id;
 
+		$_SESSION = &$this->wp_session;
+		
 		$quizPath = ( isset($_SESSION['wpsqt']['item_id'])
 			&& ctype_digit($_SESSION['wpsqt']['item_id']) ) ?
 			$blog_id.'/'.$_SESSION['wpsqt']['current_type'].'-'.$_SESSION['wpsqt']['item_id'].'/' : '';
@@ -277,6 +283,7 @@ class Wpsqt_Core {
 	public static function saveCurrentState($currentStep) {
 		global $wpdb;
 
+		$_SESSION = &$this->wp_session;
 
 		$quizName = $_SESSION["wpsqt"]["current_id"];
 		$quizId = $_SESSION['wpsqt'][$quizName]['details']['id'];

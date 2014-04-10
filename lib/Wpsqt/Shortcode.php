@@ -64,6 +64,8 @@ class Wpsqt_Shortcode {
 	protected $_acceptableTypes = array('quiz','survey', 'poll');
 
 	protected $_restore = false;
+	
+	protected $wp_session = WP_Session::get_instance();
 
 	/**
 	 * Starts the shortcode off firstly checks to see
@@ -79,6 +81,8 @@ class Wpsqt_Shortcode {
 	public function __construct($identifier,$type){
 		global $wpdb;
 
+		$_SESSION = &$this->wp_session;
+		
 		if ( !isset($_SESSION['wpsqt']) ){
 			$_SESSION['wpsqt'] = array();
 		}
@@ -167,6 +171,8 @@ class Wpsqt_Shortcode {
 
 		global $wpdb;
 
+		$_SESSION = &$this->wp_session;
+		
 		// Check and see if there is a major issue.
 		if ( !empty($this->_errors) ){
 			global $message;
@@ -480,6 +486,8 @@ class Wpsqt_Shortcode {
 
 		global $wpdb;
 
+		$_SESSION = &$this->wp_session;
+		
 		$quizName = $_SESSION["wpsqt"]["current_id"];
 		$sectionKey = $this->_key;
 
@@ -528,6 +536,8 @@ class Wpsqt_Shortcode {
 
 		global $wpdb;
 
+		$_SESSION = &$this->wp_session;
+		
 		$quizName = $_SESSION['wpsqt']['current_id'];
 
 		if (isset($_SESSION['wpsqt'][$quizName]['details']['timer']) && $_SESSION['wpsqt'][$quizName]['details']['timer'] != '0' && $_SESSION['wpsqt'][$quizName]['details']['timer'] != "") {
@@ -709,6 +719,8 @@ class Wpsqt_Shortcode {
 
 		global $wpdb;
 
+		$_SESSION = &$this->wp_session;
+		
 		$quizName = $_SESSION['wpsqt']['current_id'];
 
 		$surveyResults = $wpdb->get_row(

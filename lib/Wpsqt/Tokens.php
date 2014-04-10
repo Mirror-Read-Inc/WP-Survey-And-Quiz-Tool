@@ -57,6 +57,8 @@ class Wpsqt_Tokens {
 		return apply_filters( "wpsqt_replacement_tokens" , self::$instance );
 	}
 	
+	protected $wp_session = WP_Session::get_instance();
+	
 	/**
 	 * the tokens that are to be used for replacement.
 	 * @var array
@@ -112,6 +114,8 @@ class Wpsqt_Tokens {
 	}
 	
 	public function setDefaultValues(){
+		
+		$_SESSION = &$this->wp_session;
 		
 		$quizName = $_SESSION['wpsqt']['current_id'];
 		

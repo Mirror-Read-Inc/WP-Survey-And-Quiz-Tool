@@ -1,3 +1,8 @@
+<?php
+$wp_session = WP_Session::get_instance();
+$_SESSION = &$wp_session;
+?>
+
 <?php if ( $sections == false ) { ?>
 
 	<p>There are no results for this survey yet.</p>

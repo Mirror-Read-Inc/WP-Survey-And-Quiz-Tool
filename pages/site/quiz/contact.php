@@ -1,3 +1,8 @@
+<?php
+$wp_session = WP_Session::get_instance();
+$_SESSION = &$wp_session;
+?>
+
 <h1><?php echo $_SESSION['wpsqt']['current_name']; ?></h1>
 
 <?php if ( isset($errors) && !empty($errors) ){ ?>
