@@ -57,13 +57,17 @@ class Wpsqt_Tokens {
 		return apply_filters( "wpsqt_replacement_tokens" , self::$instance );
 	}
 	
-	protected $wp_session = WP_Session::get_instance();
+	protected $wp_session;
 	
 	/**
 	 * the tokens that are to be used for replacement.
 	 * @var array
 	 */	
 	protected $_tokens = array();
+	
+	public function __construct(){
+		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+	}
 	
 	/**
 	 * Adds a token to the tokens array. 

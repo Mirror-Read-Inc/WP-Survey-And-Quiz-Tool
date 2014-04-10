@@ -65,7 +65,7 @@ class Wpsqt_Shortcode {
 
 	protected $_restore = false;
 	
-	protected $wp_session = WP_Session::get_instance();
+	protected $wp_session;
 
 	/**
 	 * Starts the shortcode off firstly checks to see
@@ -81,6 +81,7 @@ class Wpsqt_Shortcode {
 	public function __construct($identifier,$type){
 		global $wpdb;
 
+		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
 		$_SESSION = &$this->wp_session;
 		
 		if ( !isset($_SESSION['wpsqt']) ){
@@ -103,6 +104,7 @@ class Wpsqt_Shortcode {
 		$_SESSION['wpsqt']['current_id'] = $identifier;
 		if ( $this->_step == 0 ){
 
+			$_SESSION['wpsqt'][$identifier] = array();
 			$_SESSION['wpsqt'][$identifier]['start_time'] = microtime(true);
 			$_SESSION['wpsqt'][$identifier]['person'] = array();
 			$_SESSION['wpsqt'][$identifier]['details'] = Wpsqt_System::getItemDetails($identifier, $type);

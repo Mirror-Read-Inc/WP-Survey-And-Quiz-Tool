@@ -11,7 +11,11 @@ require_once WPSQT_DIR.'lib/Wpsqt/Tokens.php';
  */
 class Wpsqt_Mail {
 	
-	protected $wp_session = WP_Session::get_instance();
+	protected $wp_session;
+	
+	public function __construct(){
+		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+	}
 	
 	/**
 	 * Sends the notification email to respondent
@@ -64,7 +68,8 @@ class Wpsqt_Mail {
 	
 		global $wpdb;
 		
-		$_SESSION = &$this->wp_session;
+		$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+		$_SESSION = &$wp_session;
 		
 		$quizName = $_SESSION['wpsqt']['current_id'];
 		

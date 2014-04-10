@@ -12,7 +12,7 @@ class Wpsqt_Core {
 
 	protected $_pages = array();
 
-	protected $wp_session = WP_Session::get_instance();
+	protected $wp_session;
 	
 	/**
 	 * Adds the generic hooks that are required throughout
@@ -23,6 +23,8 @@ class Wpsqt_Core {
 
 	public function __construct(){
 
+		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+	
 		$this->_addPage(WPSQT_PAGE_MAIN, "WPSQT", "WPSQT", "wpsqt-manage", "Main")
 		->_addPage(WPSQT_PAGE_MAIN.'&type=quiz', "Quizzes", "Quizzes", "wpsqt-manage", "Quizzes", WPSQT_PAGE_MAIN)
 		->_addPage(WPSQT_PAGE_MAIN.'&type=survey', "Surveys", "Surveys", "wpsqt-manage", "Surveys", WPSQT_PAGE_MAIN)
@@ -167,7 +169,8 @@ class Wpsqt_Core {
 
 		global $blog_id;
 
-		$_SESSION = &$this->wp_session;
+		$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+		$_SESSION = &$wp_session;
 		
 		$quizPath = ( isset($_SESSION['wpsqt']['item_id'])
 			&& ctype_digit($_SESSION['wpsqt']['item_id']) ) ?

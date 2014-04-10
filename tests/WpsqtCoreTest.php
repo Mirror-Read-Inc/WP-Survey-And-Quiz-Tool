@@ -18,11 +18,13 @@ class WpsqtCoreTest extends PHPUnit_Framework_TestCase {
 	 * directory.
 	 */
 	public function setUp(){
+				
+		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];	
 		
 		$this->_customPagesDirectory = WPSQT_DIR.'pages/custom';
 	}
 	
-	protected $wp_session = WP_Session::get_instance();
+	protected $wp_session;
 	
 	/**
 	 * Holds the location of the custom string directory. 

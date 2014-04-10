@@ -11,14 +11,13 @@
 	 */
 
 class Wpsqt_Page_Maintenance_Debug extends Wpsqt_Page {
-	
-	protected $wp_session = WP_Session::get_instance();
-		
+				
 	public function process(){	
 	
 		global $wpdb;
 		
-		$_SESSION = &$this->wp_session;
+		$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+		$_SESSION = &$wp_session;
 		
 		if ( $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['ManualDb']) ) {
 			wpsqt_main_install();
