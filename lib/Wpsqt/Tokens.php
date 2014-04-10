@@ -50,7 +50,7 @@ class Wpsqt_Tokens {
 						   ->addToken("USER_FNAME", "The first name of the user")
 						   ->addToken("USER_LNAME", "The last name of the user")
 						   ->addToken("TB_B", "Toggle block of information after this tag") 
-						   ->addToken("TB_E", "End of block of information to be toggled"); 			
+						   ->addToken("TB_E", "End of block of information to be toggled")		
 						   ->addToken("TIME_TAKEN", "The time it took the user to complete the quiz.");
 		}
 		
