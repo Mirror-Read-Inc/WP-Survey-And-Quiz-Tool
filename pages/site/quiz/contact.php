@@ -1,5 +1,5 @@
 <?php
-$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();
 $_SESSION = &$wp_session;
 ?>
 

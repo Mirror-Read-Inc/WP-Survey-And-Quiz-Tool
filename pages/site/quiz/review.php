@@ -7,7 +7,7 @@ require_once WPSQT_DIR.'/lib/Wpsqt/Tokens.php';
 $objTokens = Wpsqt_Tokens::getTokenObject();
 $objTokens->setDefaultValues();
 
-$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();
 $_SESSION = &$wp_session;
 
 foreach ( $_SESSION['wpsqt'][$quizName]['sections'] as $section ){ ?>

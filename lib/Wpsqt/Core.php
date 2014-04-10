@@ -23,7 +23,7 @@ class Wpsqt_Core {
 
 	public function __construct(){
 
-		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();
 	
 		$this->_addPage(WPSQT_PAGE_MAIN, "WPSQT", "WPSQT", "wpsqt-manage", "Main")
 		->_addPage(WPSQT_PAGE_MAIN.'&type=quiz', "Quizzes", "Quizzes", "wpsqt-manage", "Quizzes", WPSQT_PAGE_MAIN)

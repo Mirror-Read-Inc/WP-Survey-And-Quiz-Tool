@@ -19,7 +19,7 @@ class WpsqtCoreTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function setUp(){
 				
-		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];	
+		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();	
 		
 		$this->_customPagesDirectory = WPSQT_DIR.'pages/custom';
 	}

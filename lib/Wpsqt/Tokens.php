@@ -66,7 +66,7 @@ class Wpsqt_Tokens {
 	protected $_tokens = array();
 	
 	public function __construct(){
-		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();
 	}
 	
 	/**

@@ -81,7 +81,7 @@ class Wpsqt_Shortcode {
 	public function __construct($identifier,$type){
 		global $wpdb;
 
-		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();
 		$_SESSION = &$this->wp_session;
 		
 		if ( !isset($_SESSION['wpsqt']) ){

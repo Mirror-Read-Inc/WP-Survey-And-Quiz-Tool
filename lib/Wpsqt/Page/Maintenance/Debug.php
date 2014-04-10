@@ -16,7 +16,7 @@ class Wpsqt_Page_Maintenance_Debug extends Wpsqt_Page {
 	
 		global $wpdb;
 		
-		$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+		$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();
 		$_SESSION = &$wp_session;
 		
 		if ( $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['ManualDb']) ) {

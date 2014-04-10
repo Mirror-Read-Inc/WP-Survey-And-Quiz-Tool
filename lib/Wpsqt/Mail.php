@@ -14,7 +14,7 @@ class Wpsqt_Mail {
 	protected $wp_session;
 	
 	public function __construct(){
-		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+		$this->wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();
 	}
 	
 	/**
@@ -68,7 +68,7 @@ class Wpsqt_Mail {
 	
 		global $wpdb;
 		
-		$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+		$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();
 		$_SESSION = &$wp_session;
 		
 		$quizName = $_SESSION['wpsqt']['current_id'];
