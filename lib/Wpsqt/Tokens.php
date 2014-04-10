@@ -50,8 +50,8 @@ class Wpsqt_Tokens {
 						   ->addToken("USER_FNAME", "The first name of the user")
 						   ->addToken("USER_LNAME", "The last name of the user")
 						   ->addToken("TB_B", "Toggle block of information after this tag") 
-						   ->addToken("TB_E", "End of block of information to be toggled"); 
-			
+						   ->addToken("TB_E", "End of block of information to be toggled"); 			
+						   ->addToken("TIME_TAKEN", "The time it took the user to complete the quiz.");
 		}
 		
 		return apply_filters( "wpsqt_replacement_tokens" , self::$instance );
@@ -164,6 +164,21 @@ class Wpsqt_Tokens {
 		// Toggle a block of information
 		$this->setTokenValue('TB_B'   , '<div class="wpsqt-toggle"><div class="wpsqt-show-toggle"> <a href="#">[ '.__('More', 'wp-survey-and-quiz-tool').' >> ]</a></div><div class="wpsqt-toggle-block" style="display:none;">');
 		$this->setTokenValue('TB_E'   , '</div><div class="wpsqt-hide-toggle" style="display:none;"><a href="#">[ << '.__('Less', 'wp-survey-and-quiz-tool').']</a></div></div>' );
+		
+		if (!isset($_SESSION['wpsqt'][$quizName]['start_time'])) {
+			$this->setTokenValue('TIME_TAKEN', '');
+		}
+		else {
+			//determine minutes and seconds.
+			$timeTaken = round((microtime(true) - $_SESSION['wpsqt'][$quizName]['start_time']), 0);
+			$minTaken = (int)($timeTaken / 60);
+			$secTaken = $timeTaken % 60;
+			//conjugate
+			if ($minTaken > 0) $strTimeTaken = $minTaken . (($minTaken === 1) ? " min " : " mins ");
+			if ($secTaken > 0) $strTimeTaken .= $secTaken . (($secTaken === 1) ? " sec " : " secs ");
+			
+			$this->setTokenValue('TIME_TAKEN', $strTimeTaken);
+		}
 		
 		apply_filters("wpsqt_set_token_values", $this);
 		
