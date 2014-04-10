@@ -10,14 +10,14 @@
 					$question['answers'] = $answers;
 
 					// Store the order of the answers for review page
-					$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : [];
+					$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();
 					$_SESSION = &$wp_session;
 					$_SESSION['wpsqt'][$quizName]['sections'][$sectionKey]['questions'][$questionKey]['answers'] = $answers;
 				}
 			?>
 			<?php foreach ( $question['answers'] as $answerKey => $answer ){ ?>
 				<li>
-					<input type="<?php echo ($question['type'] == 'Single' ) ? 'radio' : 'checkbox'; ?>" name="answers[<?php echo $questionKey; ?>][]" value="<?php echo $answerKey; ?>" id="answer_<?php echo $question['id']; ?>_<?php echo $answerKey;?>" <?php if ( (isset($answer['default']) && $answer['default'] == 'yes') || in_array($answerKey, $givenAnswer)) {  ?> checked="checked" <?php } ?> /> <label for="answer_<?php echo $question['id']; ?>_<?php echo $answerKey;?>"><?php echo esc_html( $answer['text'] ); ?></label> 
+					<input type="<?php echo ($question['type'] == 'Single' ) ? 'radio' : 'checkbox'; ?>" name="answers[<?php echo $questionKey; ?>][]" value="<?php echo $answerKey; ?>" id="answer_<?php echo $question['id']; ?>_<?php echo $answerKey;?>" <?php if ( (isset($answer['default']) && $answer['default'] == 'yes') || in_array($answerKey, $givenAnswer)) {  ?> checked="checked" <?php } ?> /> <label for="answer_<?php echo $question['id']; ?>_<?php echo $answerKey;?>"><?php echo $answer['text'] ?></label> 
 				</li>
 			<?php } 
 				if (    $question['type'] == 'Multiple Choice' 
