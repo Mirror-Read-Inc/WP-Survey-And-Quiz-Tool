@@ -1,0 +1,8 @@
+#wpsqt-mr-msg { width: 95%; margin-top: 2em; padding-top: 1em; padding-bottom: 1em; padding-left: 1em; border-width: 1px; border-style: solid; 
+				font-size: 1.2em; font-weight: bold;}
+#wpsqt-mr-msg.success { color: #157A2C; border-color: #157A2C; background-color: #DFFFE4; }
+#wpsqt-mr-msg.failure { color: #FF1900; border-color: #FF1900; background-color: #E6FF00; }
+
+#wpqst-mr-add-edit label { display: block; overflow: auto; width: 20em; margin: 1em; }
+#wpqst-mr-add-edit input[type=text], #wpqst-mr-add-edit select { display: block; float: right; width: 15em;}
+#wpqst-mr-add-edit #wpqst-mr-submit { margin: 1em; }

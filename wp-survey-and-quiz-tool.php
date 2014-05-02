@@ -164,3 +164,6 @@ if (is_admin()){
 } else {
 	$objWpsqtPlugin = new Wpsqt_Core();
 }
+
+//Mirror read custom
+require_once WPSQT_DIR.'_mirrorread_custom/wpsqt-mr-survey-quiz-instructions.php';
