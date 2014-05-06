@@ -60,7 +60,7 @@ function is_arraylike($a) {
 
 function in_arraylike($needle, $haystack) {
 	
-	if (get_class($haystack) === "Recursive_ArrayAccess") { return $haystack->contains($needle); }
+	if (method_exists($haystack, "contains")) { return $haystack->contains($needle); }
 	return in_array($needle, $haystack);
 }
 
