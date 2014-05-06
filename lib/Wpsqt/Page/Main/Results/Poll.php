@@ -23,7 +23,7 @@ class Wpsqt_Page_Main_Results_Poll extends Wpsqt_Page_Main_Results {
 		
 		$sections = unserialize($results['sections']);
 
-		if (empty($sections) || !is_array($sections)) {
+		if (empty($sections) || !is_arraylike($sections)) {
 			echo 'There are no results for this poll yet';
 			return;
 		}
@@ -31,7 +31,7 @@ class Wpsqt_Page_Main_Results_Poll extends Wpsqt_Page_Main_Results {
 		foreach ($sections as $section) {
 			foreach ($section['questions'] as $question) {
 				$total = 0;
-				if (!empty($question['answers']) && is_array($question['answers'])) {
+				if (!empty($question['answers']) && is_arraylike($question['answers'])) {
 					foreach($question['answers'] as $answer) {
 						$total += $answer['count'];
 					}

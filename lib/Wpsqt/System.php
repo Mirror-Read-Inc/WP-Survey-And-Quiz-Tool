@@ -154,7 +154,7 @@ class Wpsqt_System {
 		}		
 							
 		if ( !empty($row['settings']) 
-			&& is_array($settings = unserialize($row['settings'])) ){
+			&& is_arraylike($settings = unserialize($row['settings'])) ){
 				$details = array_merge($details,$settings);
 		}					
 		$details['type'] = $type;

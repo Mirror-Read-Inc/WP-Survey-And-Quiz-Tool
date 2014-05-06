@@ -94,7 +94,7 @@ class Wpsqt_Shortcode {
 
 		$this->_acceptableTypes = apply_filters("wpsqt_shortcode_types",$this->_acceptableTypes);
 		$this->_acceptableTypes = array_map("strtolower",$this->_acceptableTypes);
-		if ( !in_array($type, $this->_acceptableTypes) ) {
+		if ( !in_arraylike($type, $this->_acceptableTypes) ) {
 			$this->_errors['type'] = "Invalid type given";
 		}
 
@@ -362,7 +362,7 @@ class Wpsqt_Shortcode {
 				$_SESSION['wpsqt'][$quizName]['sections'][$pastSectionKey]['answers'] = array();
 			}
 			$canAutoMark = true;
-			if (isset($_SESSION["wpsqt"][$quizName]["sections"][$pastSectionKey]["questions"]) && is_array($_SESSION["wpsqt"][$quizName]["sections"][$pastSectionKey]["questions"])) {
+			if (isset($_SESSION["wpsqt"][$quizName]["sections"][$pastSectionKey]["questions"]) && is_arraylike($_SESSION["wpsqt"][$quizName]["sections"][$pastSectionKey]["questions"])) {
 				foreach ($_SESSION["wpsqt"][$quizName]["sections"][$pastSectionKey]["questions"] as $questionData ){
 					if ( isset($questionData['required']) && $questionData['required'] == "yes") {
 						$requiredQuestions['exist']++;
@@ -395,7 +395,7 @@ class Wpsqt_Shortcode {
 								$numberVarName = "subIncorrect";
 							}
 
-							if ( in_array($answerKey, $givenAnswers) ){
+							if ( in_arraylike($answerKey, $givenAnswers) ){
 								${$numberVarName}++;
 							}
 						}
@@ -815,7 +815,7 @@ class Wpsqt_Shortcode {
 					}
 				} else {
 					if(isset($section['answers'][$question['id']])) {
-						if (is_array($section['answers'][$question['id']]['given']) && count($section['answers'][$question['id']]['given']) > 1) {
+						if (is_arraylike($section['answers'][$question['id']]['given']) && count($section['answers'][$question['id']]['given']) > 1) {
 							$givenAnswer = $section['answers'][$question['id']]['given'];
 						} else {
 							$givenAnswer = (int) current($section['answers'][$question['id']]['given']);
@@ -844,7 +844,7 @@ class Wpsqt_Shortcode {
 				if ($cachedSections[$sectionKey]['questions'][$question['id']]['type'] == "Likert Matrix") {
 					if (isset($section['answers'][$question['id']]['given'])) {
 						foreach ($section['answers'][$question['id']]['given'] as $givenAnswerData) {
-							if (is_array($givenAnswerData)) {
+							if (is_arraylike($givenAnswerData)) {
 								// Other field:
 								$otherText = $givenAnswerData['text'];
 								$givenAnswerData = explode("_", $givenAnswerData[0]);
@@ -868,7 +868,7 @@ class Wpsqt_Shortcode {
 				}
 				$type = $cachedSections[$sectionKey]['questions'][$question['id']]['type'];
 				if (isset($type) && $type != "Multiple" && $type != "Likert" && $type != "Likert Matrix" && isset($givenAnswer)) {
-					if (is_array($givenAnswer)) {
+					if (is_arraylike($givenAnswer)) {
 						foreach ($givenAnswer as $answer) {
 							$cachedSections[$sectionKey]['questions'][$question['id']]['answers'][$answer]["count"]++;
 						}

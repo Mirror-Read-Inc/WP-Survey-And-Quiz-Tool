@@ -2,7 +2,7 @@
 if ($question['likertscale'] != "Agree/Disagree") {
 	$scale = (int) $question['likertscale'];
 	for ( $i = 1; $i <= $scale; $i++){ ?>
-		<span class="wpsqt_likert_answer"><input type="radio" name="answers[<?php echo $questionKey; ?>]" value="<?php echo $i; ?>" <?php if ( in_array($i, $givenAnswer) ) { ?> checked="checked" <?php } ?> id="answer_<?php echo $question['id']; ?>_<?php echo $i; ?>" /> <label for="answer_<?php echo $question['id']; ?>_<?php echo $i; ?>"><?php echo $i; ?></label></span>
+		<span class="wpsqt_likert_answer"><input type="radio" name="answers[<?php echo $questionKey; ?>]" value="<?php echo $i; ?>" <?php if ( in_arraylike($i, $givenAnswer) ) { ?> checked="checked" <?php } ?> id="answer_<?php echo $question['id']; ?>_<?php echo $i; ?>" /> <label for="answer_<?php echo $question['id']; ?>_<?php echo $i; ?>"><?php echo $i; ?></label></span>
 	<?php }
 } else {
 	?>

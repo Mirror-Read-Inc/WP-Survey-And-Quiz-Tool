@@ -63,7 +63,7 @@ foreach ($_SESSION['wpsqt'][$quizName]['sections'][$sectionKey]['questions'] as 
 
 			<?php
 				// See if the question has been missed and this a replay if not end the red text here.
-				if ( empty($_SESSION['wpsqt']['current_message']) || in_array($questionId,$_SESSION['wpsqt']['required']['given']) ){
+				if ( empty($_SESSION['wpsqt']['current_message']) || in_arraylike($questionId,$_SESSION['wpsqt']['required']['given']) ){
 					?></strong></font><?php
 				}
 			}
@@ -74,7 +74,7 @@ foreach ($_SESSION['wpsqt'][$quizName]['sections'][$sectionKey]['questions'] as 
 			echo stripslashes($question['name']);
 
 			// See if the question has been missed and this is a replay
-			if ( !empty($_SESSION['wpsqt']['current_message']) && !in_array($questionId,$_SESSION['wpsqt']['required']['given']) ){
+			if ( !empty($_SESSION['wpsqt']['current_message']) && !in_arraylike($questionId,$_SESSION['wpsqt']['required']['given']) ){
 				?></strong></font><?php
 			}
 

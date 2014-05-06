@@ -118,7 +118,7 @@ class WpsqtHooksTest extends PHPUnit_Framework_TestCase {
 		
 		$this->assertTrue(array_key_exists($hookName,$wp_filter),"'".$hookName."' action doesn't seem to exist.");
 		$this->assertFalse(empty($wp_filter[$hookName]),"'".$hookName."' action appears to be empty.");
-		$this->assertTrue(is_array($wp_filter[$hookName]), "'".$hookName."' action isn't an array as expected.");
+		$this->assertTrue(is_arraylike($wp_filter[$hookName]), "'".$hookName."' action isn't an array as expected.");
 		$this->assertTrue(array_key_exists($priority, $wp_filter[$hookName]), "The priority ".$priority." doesn't appear to exist for action '".$hookName."'.");	
 		$this->assertFalse(empty($wp_filter[$hookName][$priority]),"The priority ".$priority." for action '".$hookName."' appears to be empty.");
 		$this->assertTrue(is_array($wp_filter[$hookName][$priority]),"The priority ".$priority." for action '".$hookName."' doesn't appear to be an array." );

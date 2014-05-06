@@ -59,7 +59,7 @@ $_SESSION = &$wp_session;
 							foreach($usection as $result) {
 
 								foreach($result['answers'] as $uanswerkey => $uanswer) {
-									if($uanswerkey == $questonKey && in_array($uanswerkey, $freetextq)) {
+									if($uanswerkey == $questonKey && in_arraylike($uanswerkey, $freetextq)) {
 										echo '<p>'.$i.') '.$uanswer['given'][0].'</p>';
 										$i++;
 									}
@@ -163,13 +163,13 @@ $_SESSION = &$wp_session;
 	if (isset($givenAnswers[$sectionKey]['answers'][$questonKey]['given'])) {
 		$givenAnswers = $givenAnswers[$sectionKey]['answers'][$questonKey]['given'];
 		echo '<div class="wpsqt-question-response-you">You entered: ';
-		if (is_array($givenAnswers)) {
+		if (is_arraylike($givenAnswers)) {
 			$i = 1;
 			foreach ($givenAnswers as $givenAnswer) {
 				foreach($_SESSION['wpsqt'][$_SESSION['wpsqt']['current_id']]['sections'][$sectionKey]['questions'] as $question) {
 					if ($question['id'] == $questonKey) {
 						if ($question['type'] == 'Likert Matrix') {
-							if (is_array($givenAnswer)) {
+							if (is_arraylike($givenAnswer)) {
 								$givenAnswerDetails = explode("_", $givenAnswer[0]);
 							} else {
 								$givenAnswerDetails = explode("_", $givenAnswer);

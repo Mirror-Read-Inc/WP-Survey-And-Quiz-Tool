@@ -120,7 +120,7 @@ class WpsqtSystemTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("PHPUnit test  quiz creation",$quizName,"Quiz name isn't what was expected");
 		$this->assertEquals(0,$quizId,"Quiz ID isn't what was expected");
 		
-		$this->assertTrue(is_array($unserializedDetails), "The serialized quiz details isn't an array.");
+		$this->assertTrue(is_arraylike($unserializedDetails), "The serialized quiz details isn't an array.");
 		$this->assertEquals(array('display_result' => 'no',
 								  		'status' => 'disabled',
 										'limit_one' => 'no',

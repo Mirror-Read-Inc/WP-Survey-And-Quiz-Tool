@@ -19,7 +19,7 @@ function backup_tables($host,$user,$pass,$name,$tables = '*')
 	}
 	else
 	{
-		$tables = is_array($tables) ? $tables : explode(',',$tables);
+		$tables = is_arraylike($tables) ? $tables : explode(',',$tables);
 	}
 	
 	//cycle through

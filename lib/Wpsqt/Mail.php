@@ -148,7 +148,7 @@ class Wpsqt_Mail {
 		$blogname = get_bloginfo('name');
 		$emailSubject = $type.' Notification From '.$blogname;
 		$headers = 'From: '.$blogname.' <'.$fromEmail.'>' . "\r\n";
-		if (isset($emailList) && is_array($emailList)) {
+		if (isset($emailList) && is_arraylike($emailList)) {
 			foreach( $emailList  as $emailAddress ){
 				wp_mail($emailAddress,$emailSubject,$emailMessage,$headers);
 			}	

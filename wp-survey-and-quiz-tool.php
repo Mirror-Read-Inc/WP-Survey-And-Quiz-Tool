@@ -54,6 +54,16 @@ define( 'WPSQT_VERSION'              , '2.13.1' );
 define( 'WPSQT_DIR'                  , realpath(dirname(__FILE__)).'/') ;
 define( 'WPSQT_FILE'     , __FILE__ );
 
+function is_arraylike($a) {
+	return is_array($a) || $a instanceof Traversable;
+}
+
+function in_arraylike($needle, $haystack) {
+	
+	if (get_class($haystack) === "Recursive_ArrayAccess") { return $haystack->contains($needle); }
+	return in_array($needle, $haystack);
+}
+
 require_once WPSQT_DIR.'lib/Wpsqt/Core.php';
 require_once WPSQT_DIR.'lib/Wpsqt/System.php';
 

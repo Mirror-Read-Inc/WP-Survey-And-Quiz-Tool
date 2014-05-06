@@ -57,7 +57,7 @@ $hardPoints = 0;
 	<?php } ?>
 	
 	<?php
-		if ( is_array($result['sections']) ){
+		if ( is_arraylike($result['sections']) ){
 			foreach ( $result['sections'] as $section ){ ?>
 			
 			<h3 style="text-decoration:underline;">Section - <?php echo $section['name']; ?></h3>
@@ -87,7 +87,7 @@ $hardPoints = 0;
 					<p class="answer_given">
 						<ol>
 							<?php foreach ($questionArray['answers'] as $answerKey => $answer){ ?>
-								  <li><font color="<?php echo esc_attr( $answer['correct'] != 'yes' ) ?  (isset($section['answers'][$questionId]['given']) &&  in_array($answerKey, $section['answers'][$questionId]['given']) ) ? '#FF0000' :  '#000000' : 'green' ; ?>"><?php echo (stripslashes($answer['text'])); ?></font><?php if (isset($section['answers'][$questionId]['given']) && in_array($answerKey, $section['answers'][$questionId]['given']) ){ ?> - Given<?php }?></li>
+								  <li><font color="<?php echo esc_attr( $answer['correct'] != 'yes' ) ?  (isset($section['answers'][$questionId]['given']) &&  in_arraylike($answerKey, $section['answers'][$questionId]['given']) ) ? '#FF0000' :  '#000000' : 'green' ; ?>"><?php echo (stripslashes($answer['text'])); ?></font><?php if (isset($section['answers'][$questionId]['given']) && in_arraylike($answerKey, $section['answers'][$questionId]['given']) ){ ?> - Given<?php }?></li>
 							<?php } ?>
 						</ol>
 					</p>
@@ -96,7 +96,7 @@ $hardPoints = 0;
 					?>		
 					<div style="margin-left: 35px; margin-bottom: 40px;">		
 					<b>Answer Given</b>
-					<p class="answer_given" style="background-color : #c0c0c0; border : 1px dashed black; padding : 5px;overflow:auto;height : 200px; width: 500px;"><?php if ( isset($section['answers'][$questionId]['given']) && is_array($section['answers'][$questionId]['given']) ){ echo nl2br(esc_html(stripslashes(current($section['answers'][$questionId]['given'])))); } ?></p>
+					<p class="answer_given" style="background-color : #c0c0c0; border : 1px dashed black; padding : 5px;overflow:auto;height : 200px; width: 500px;"><?php if ( isset($section['answers'][$questionId]['given']) && is_arraylike($section['answers'][$questionId]['given']) ){ echo nl2br(esc_html(stripslashes(current($section['answers'][$questionId]['given'])))); } ?></p>
 					<p><b>Mark</b> <input type="hidden" name="old_mark[<?php echo $questionKey; ?>]" id="old_mark_<?php echo $questionKey; ?>" value="<?php echo (isset($questionArray['mark']) && ctype_digit($questionArray['mark']) ? $questionArray['mark'] : 0 ); ?>" /> <select name="mark[<?php echo $questionKey; ?>]" class="mark" id="current_mark_<?php echo $questionKey; ?>">
 						<?php for( $i = 0; $i <= $questionArray['points']; $i++ ){ 
 								if ( $i != 0) { $totalPoints++; }

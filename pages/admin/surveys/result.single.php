@@ -54,7 +54,7 @@
 				<p class="answer_given">
 					<ol>
 						<?php foreach ($questionArray['answers'] as $answerKey => $answer){ ?>
-							  <li><font color="<?php echo ( !isset($answer['correct']) || $answer['correct'] != 'yes' ) ?  (isset($section['answers'][$questionId]['given']) &&  in_array($answerKey, $section['answers'][$questionId]['given']) ) ? '#FF0000' :  '#000000' : '#00FF00' ; ?>"><?php echo stripslashes($answer['text']) ?></font><?php if (isset($section['answers'][$questionId]['given']) && in_array($answerKey, $section['answers'][$questionId]['given']) ){ ?> - Given<?php }?></li>
+							  <li><font color="<?php echo ( !isset($answer['correct']) || $answer['correct'] != 'yes' ) ?  (isset($section['answers'][$questionId]['given']) &&  in_arraylike($answerKey, $section['answers'][$questionId]['given']) ) ? '#FF0000' :  '#000000' : '#00FF00' ; ?>"><?php echo stripslashes($answer['text']) ?></font><?php if (isset($section['answers'][$questionId]['given']) && in_arraylike($answerKey, $section['answers'][$questionId]['given']) ){ ?> - Given<?php }?></li>
 						<?php } ?>
 					</ol>
 				</p>
@@ -63,7 +63,7 @@
 				} else if (ucfirst($questionArray['type']) == 'Likert Matrix') {
 					echo '<ul>';
 					foreach ($section['answers'][$questionId]['given'] as $givenAnswer) {
-						if (is_array($givenAnswer)) {
+						if (is_arraylike($givenAnswer)) {
 							$otherText = $givenAnswer['text'];
 							$givenAnswer = explode("_", $givenAnswer[0]);
 							echo '<li><strong>'.$otherText.'</strong> - '.$givenAnswer[1].'</li>';

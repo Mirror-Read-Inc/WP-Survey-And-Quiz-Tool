@@ -35,7 +35,7 @@
 							foreach($usection as $result) {
 
 								foreach($result['answers'] as $uanswerkey => $uanswer) {
-									if($uanswerkey == $questonKey && in_array($uanswerkey, $freetextq)) {
+									if($uanswerkey == $questonKey && in_arraylike($uanswerkey, $freetextq)) {
 										echo '<p>'.$i.') '.$uanswer['given'][0].'</p>';
 										$i++;
 									}
