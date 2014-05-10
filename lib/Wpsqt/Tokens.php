@@ -50,8 +50,7 @@ class Wpsqt_Tokens {
 						   ->addToken("USER_FNAME", "The first name of the user")
 						   ->addToken("USER_LNAME", "The last name of the user")
 						   ->addToken("TB_B", "Toggle block of information after this tag") 
-						   ->addToken("TB_E", "End of block of information to be toggled"); 
-			
+						   ->addToken("TB_E", "End of block of information to be toggled");
 		}
 		
 		return apply_filters( "wpsqt_replacement_tokens" , self::$instance );
@@ -168,11 +167,19 @@ class Wpsqt_Tokens {
 	 */
 	public function doReplacement($string){
 						
-		foreach( $this->_tokens as $token => $data ){
-			$string = str_ireplace("%".$token."%", $data['value'], $string);	
-		}
-		
-		return $string;
+		$replacer = function($matches) {
+			
+			$token = $matches[1];
+			
+			if(!isset($this->_tokens[$token])) {
+				return $matches[0];
+			} else {
+				$data = $this->_tokens[$token];
+				$value = $data['value'];
+				return is_callable($value) ? call_user_func($value) : $value;
+			}	
+		};
+		return preg_replace_callback("/%(\w+)%/", $replacer, $string);
 	}
 	
 	
