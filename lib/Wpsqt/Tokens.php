@@ -191,11 +191,19 @@ class Wpsqt_Tokens {
 	 */
 	public function doReplacement($string){
 						
-		foreach( $this->_tokens as $token => $data ){
-			$string = str_ireplace("%".$token."%", $data['value'], $string);	
-		}
-		
-		return $string;
+		$replacer = function($matches) {
+			
+			$token = $matches[1];
+			
+			if(!isset($this->_tokens[$token])) {
+				return $matches[0];
+			} else {
+				$data = $this->_tokens[$token];
+				$value = $data['value'];
+				return is_callable($value) ? call_user_func($value) : $value;
+			}	
+		};
+		return preg_replace_callback("/%(\w+)%/", $replacer, $string);
 	}
 	
 	
