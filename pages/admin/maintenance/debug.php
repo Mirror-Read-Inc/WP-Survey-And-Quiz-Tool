@@ -42,7 +42,16 @@
 		
 			<p style="text-align:center;">This will run every single possible database upgrade.</p>
 			<p style="text-align:center;font-weight: bold;">This can easily corrupt the entire WPSQT database. Only run this if you have to or are instructed to. Make sure you have a backup.</p>
+
+		</form>
+		<hr />
+		<form method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
+			
+			<p style="text-align:center;">
+				<input class="button-primary" type="submit" name="DoTokensReplacement" value="Do Tokens Replacement" id="submitbutton" />
+			</p>
 		
+			<p style="text-align:center;">This will show all token replacement values</p>
 		</form>
 	</div>	
 	

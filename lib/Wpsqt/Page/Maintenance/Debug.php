@@ -26,6 +26,8 @@ class Wpsqt_Page_Maintenance_Debug extends Wpsqt_Page {
 		
 		if ( $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['ResetSession']) ) {
 			$_SESSION['wpsqt'] = array();
+			
+			echo '<pre>'; var_dump($_SESSION); echo '</pre>';
 		}
 		
 		if ( $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['AllUpgrades']) ) {
@@ -42,8 +44,25 @@ class Wpsqt_Page_Maintenance_Debug extends Wpsqt_Page {
 			exit;
 			
 		} 
-
-		echo '<pre>'; var_dump($_SESSION); echo '</pre>';
+		
+		if ( $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['DoTokensReplacement']) ) {
+		
+			require_once WPSQT_DIR.'lib/Wpsqt/Tokens.php';
+			$tokens = Wpsqt_Tokens::getTokenObject();
+			$tokens->setDefaultValues();
+			
+			$text = array_reduce( array_map( function($n) {
+						return "$n => %$n%\n";
+					}, 
+					$tokens->getTokenNames()
+				),
+				function($acc, $str) {
+					return $acc . $str;
+				}
+			);
+			
+			echo "<pre>" . $tokens->doReplacement($text) . "</pre>";
+		}
 		
 		$this->_pageView = "admin/maintenance/debug.php";
 	}

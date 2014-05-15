@@ -176,4 +176,4 @@ if (is_admin()){
 }
 
 //Mirror read custom
-require_once WPSQT_DIR.'_mirrorread_custom/wpsqt-mr-survey-quiz-instructions.php';
+require_once WPSQT_DIR.'_mirrorread_custom/wpsqt-mr-survey-quiz.php';

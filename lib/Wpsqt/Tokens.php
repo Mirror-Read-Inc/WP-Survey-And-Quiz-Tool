@@ -224,4 +224,7 @@ class Wpsqt_Tokens {
 		return $html;
 	}
 	
+	public function getTokenNames() {
+		return array_keys($this->_tokens);
+	}
 }
