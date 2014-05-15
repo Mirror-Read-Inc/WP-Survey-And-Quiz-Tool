@@ -38,7 +38,10 @@ function cachedGetData() {
 
 function getData() {
 	global $wpdb;
-	// FIXME - also filter by item_id, the current quiz the user is taking.
+	
+	$wp_session = class_exists('WP_Session') ? WP_Session::get_instance() : array();
+	$_SESSION = &$wp_session;
+	$itemId = $_SESSION['wpsqt']['item_id'];
 	
 	$filter = array_reduce( array_map(function($yes) {
 			
@@ -51,11 +54,13 @@ function getData() {
 		}
 	); 
 
+	echo "<pre>$itemId</pre>";
+	
 	return $wpdb->get_row(
 		"
 		SELECT COUNT( id ) AS " . MR_COUNT_PEOPLE . ", FLOOR(AVG( timetaken )) AS " . MR_AVG_TIME_TAKEN . ", FLOOR(AVG( SCORE )) AS " . AVG_SCORE . "
 		FROM  " . WPSQT_TABLE_RESULTS . "
-		WHERE $filter
+		WHERE item_id = $itemId AND ($filter)
 		",
 		ARRAY_A
 	);

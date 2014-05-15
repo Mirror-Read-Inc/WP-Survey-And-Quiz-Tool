@@ -53,6 +53,15 @@
 		
 			<p style="text-align:center;">This will show all token replacement values</p>
 		</form>
+		<hr />
+		<form method="post" action="<?php echo esc_url($_SERVER['REQUEST_URI']); ?>">
+			
+			<p style="text-align:center;">
+				<input class="button-primary" type="submit" name="ShowSession" value="Show Session" id="submitbutton" />
+			</p>
+		
+			<p style="text-align:center;">Show the session.</p>
+		</form>
 	</div>	
 	
 	

@@ -30,6 +30,10 @@ class Wpsqt_Page_Maintenance_Debug extends Wpsqt_Page {
 			echo '<pre>'; var_dump($_SESSION); echo '</pre>';
 		}
 		
+		if ( $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['ShowSession']) ) {
+			echo '<pre>'; print_r($_SESSION); echo '</pre>';
+		}
+		
 		if ( $_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['AllUpgrades']) ) {
 			
 			print "<h3>Running all upgrades</h3>".PHP_EOL;
