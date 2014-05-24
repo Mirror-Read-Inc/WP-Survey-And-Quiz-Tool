@@ -3,28 +3,28 @@
 define("MR_COUNT_PEOPLE", "COUNT_PEOPLE");
 define("MR_AVG_TIME_TAKEN", "AVG_TIME_TAKEN");
 define("MR_AVG_SCORE", "AVG_SCORE");
-define("MR_PERSON_FILTER", '%"this is the first time i have taken this test (Y/N)";__ANSWER__%');
+define("MR_PERSON_FILTER", '%"this is the first time i have taken this test - y/n";__ANSWER__%');
 
-function mrTokenCountPeople() {
+function wpsqt_mr_TokenCountPeople() {
 	$d = cachedGetData();
 	return isset($d[MR_COUNT_PEOPLE]) ? $d[MR_COUNT_PEOPLE] : 0;
 }
-function mrTokenAvgTimeTaken() {
+function wpsqt_mr_TokenAvgTimeTaken() {
 	$d = cachedGetData();
 	return isset($d[MR_AVG_TIME_TAKEN]) ? $d[MR_AVG_TIME_TAKEN] : 0;
 }
-function mrTokenAvgScore() { 
+function wpsqt_mr_TokenAvgScore() { 
 	$d = cachedGetData();
 	return isset($d[MR_AVG_SCORE]) ? $d[MR_AVG_SCORE] : 0;
 }
 
-add_filter("wpsqt_replacement_tokens", function($tokens) {
-	
-	$tokens->addToken("COUNT_PEOPLE", "The number of people who have taken the test the first time.", "mrTokenCountPeople");
-	$tokens->addToken("AVG_TIME_TAKEN", "The average time taken of people who have taken the test the first time.", "mrTokenAvgTimeTaken");
-	$tokens->addToken("AVG_SCORE", "The number average score of people who have taken the test the first time.", "mrTokenAvgScore");
+function wpsqt_mr_replacement_tokens($tokens) {
+	$tokens->addToken("COUNT_PEOPLE", "The number of people who have taken the test the first time.", "wpsqt_mr_TokenCountPeople");
+	$tokens->addToken("AVG_TIME_TAKEN", "The average time taken of people who have taken the test the first time.", "wpsqt_mr_TokenAvgTimeTaken");
+	$tokens->addToken("AVG_SCORE", "The number average score of people who have taken the test the first time.", "wpsqt_mr_TokenAvgScore");
 	return $tokens;
-});
+}
+add_filter("wpsqt_replacement_tokens", "wpsqt_mr_replacement_tokens");
 
 $mr_cached_get_data = null;
 $mr_cached_get_data_r = false;
