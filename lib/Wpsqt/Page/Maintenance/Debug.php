@@ -55,17 +55,12 @@ class Wpsqt_Page_Maintenance_Debug extends Wpsqt_Page {
 			$tokens = Wpsqt_Tokens::getTokenObject();
 			$tokens->setDefaultValues();
 			
-			$text = array_reduce( array_map( function($n) {
-						return "$n => %$n%\n";
-					}, 
-					$tokens->getTokenNames()
-				),
-				function($acc, $str) {
-					return $acc . $str;
-				}
-			);
+			$ns = array();
+			foreach ($tokens->getTokenNames() as $n) {
+				$ns[] = "$n => %$n%";
+			}
 			
-			echo "<pre>" . $tokens->doReplacement($text) . "</pre>";
+			echo "<pre>" . $tokens->doReplacement( implode("\n", $ns) ) . "</pre>";
 		}
 		
 		$this->_pageView = "admin/maintenance/debug.php";

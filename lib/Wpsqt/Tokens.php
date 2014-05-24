@@ -190,20 +190,21 @@ class Wpsqt_Tokens {
 	 * @param string $string
 	 */
 	public function doReplacement($string){
-						
-		$replacer = function($matches) {
+		
+		return preg_replace_callback("/%(\w+)%/", array($this, "replacer"), $string);
+	}
+	
+	public function replacer($matches) {
 			
-			$token = $matches[1];
-			
-			if(!isset($this->_tokens[$token])) {
-				return $matches[0];
-			} else {
-				$data = $this->_tokens[$token];
-				$value = $data['value'];
-				return is_callable($value) ? call_user_func($value) : $value;
-			}	
-		};
-		return preg_replace_callback("/%(\w+)%/", $replacer, $string);
+		$token = $matches[1];
+		
+		if(!isset($this->_tokens[$token])) {
+			return $matches[0];
+		} else {
+			$data = $this->_tokens[$token];
+			$value = $data['value'];
+			return is_callable($value) ? call_user_func($value) : $value;
+		}	
 	}
 	
 	
