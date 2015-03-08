@@ -29,19 +29,25 @@ class Wpsqt_Export_Csv extends Wpsqt_Export {
 	public function generate($id) {
 		global $wpdb;
 
-		$results = $wpdb->get_results('SELECT * FROM '.WPSQT_TABLE_RESULTS.' WHERE item_id = "'.$id.'"', ARRAY_A);
+		$this->csvLines = apply_filters('wpsqt-csv-pre-generate', [], $id);
 
-		$this->csvLines[] = 'id, Name, Score, Total, Percentage, Pass/Fail, Status, Date';
-		foreach( $results as $result ){
-			$csvline = $result['id'].",";
-			$csvline .= $result['person_name'].',';
-			if($result['total'] == 0) {$csvline .= ',,';} else {$csvline .= $result['score'].",".$result['total'].",";}
-			if($result['total'] == 0) {$csvline .= ',';} else {$csvline .= $result['percentage']."%,";}
-			if ($result['pass'] == 1) {$csvline .= "Pass,";} else {$csvline .= "Fail,";}
-			$csvline .= ucfirst($result['status']).",";
-			if (!empty($result['datetaken'])) { $csvline .= date('d-m-y G:i:s',$result['datetaken']); };
-			$this->csvLines[] = $csvline;
+		if (!$this->csvLines) {
+			$results = $wpdb->get_results('SELECT * FROM '.WPSQT_TABLE_RESULTS.' WHERE item_id = "'.$id.'"', ARRAY_A);
+
+			$this->csvLines[] = 'id, Name, Score, Total, Percentage, Pass/Fail, Status, Date';
+			foreach( $results as $result ){
+				$csvline = $result['id'].",";
+				$csvline .= $result['person_name'].',';
+				if($result['total'] == 0) {$csvline .= ',,';} else {$csvline .= $result['score'].",".$result['total'].",";}
+				if($result['total'] == 0) {$csvline .= ',';} else {$csvline .= $result['percentage']."%,";}
+				if ($result['pass'] == 1) {$csvline .= "Pass,";} else {$csvline .= "Fail,";}
+				$csvline .= ucfirst($result['status']).",";
+				if (!empty($result['datetaken'])) { $csvline .= date('d-m-y G:i:s',$result['datetaken']); };
+				$this->csvLines[] = $csvline;
+			}
 		}
+
+		$this->csvLines = apply_filters('wpsqt-csv-post-generate', $this->csvLines, $id);
 
 		return $this->csvLines;
 	}
