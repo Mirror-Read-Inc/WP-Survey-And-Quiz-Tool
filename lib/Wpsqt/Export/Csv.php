@@ -29,7 +29,7 @@ class Wpsqt_Export_Csv extends Wpsqt_Export {
 	public function generate($id) {
 		global $wpdb;
 
-		$this->csvLines = apply_filters('wpsqt-csv-pre-generate', [], $id);
+		$this->csvLines = apply_filters('wpsqt-csv-pre-generate', array(), $id);
 
 		if (!$this->csvLines) {
 			$results = $wpdb->get_results('SELECT * FROM '.WPSQT_TABLE_RESULTS.' WHERE item_id = "'.$id.'"', ARRAY_A);

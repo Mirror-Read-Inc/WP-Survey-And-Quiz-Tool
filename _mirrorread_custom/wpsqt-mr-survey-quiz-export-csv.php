@@ -10,7 +10,7 @@ function wpsqt_mr_survey_quiz_generate_csv($_, $id) {
 
     $len = count($results);
 
-    $personTemplate = [];
+    $personTemplate = array();
     for ($i = $len - 1; $i >= 0; $i--) {
 
         $result = $results[$i];
@@ -22,8 +22,8 @@ function wpsqt_mr_survey_quiz_generate_csv($_, $id) {
         }
     }
 
-    $sectionsTemplateDisplay = [];
-    $sectionsTemplate = [];
+    $sectionsTemplateDisplay = array();
+    $sectionsTemplate = array();
 
     for ($i = $len - 1; $i >= 0; $i--) {
 
@@ -35,11 +35,12 @@ function wpsqt_mr_survey_quiz_generate_csv($_, $id) {
             foreach( $sections as $section ) {
 
                 $sectionId = $section["id"];
-                $sectionTemplate = [];
+                $sectionTemplate = array();
 
                 foreach( $section["answers"] as $questionId => $answer ) {
 
-                    $sectionsTemplateDisplay[] = getByItemId($section["questions"],$questionId)["name"];
+                    $question = getByItemId($section["questions"],$questionId);
+                    $sectionsTemplateDisplay[] = $question["name"];
                     $sectionTemplate[] = $questionId;
                 }
 
@@ -50,17 +51,17 @@ function wpsqt_mr_survey_quiz_generate_csv($_, $id) {
         }
     }
 
-    $headers = array_merge(["id"], $personTemplate, ["Date taken", "Time taken", "Score", "Total", "Percentage", "Pass", "Status"], $sectionsTemplateDisplay);
+    $headers = array_merge(array("id"), $personTemplate, array("Date taken", "Time taken", "Score", "Total", "Percentage", "Pass", "Status"), $sectionsTemplateDisplay);
 
-    $rows = [];
+    $rows = array();
     foreach( $results as $result ){
 
-        $row = [];
+        $row = array();
 
         $row[] = $result["id"];
 
         $person = unserialize_to_array( $result["person"] );
-        if (!$person) { $person = []; }
+        if (!$person) { $person = array(); }
         foreach( $personTemplate as $personItem ) {
             $row[] = isset( $person[$personItem] ) ? $person[$personItem] : "";
         }
@@ -74,11 +75,11 @@ function wpsqt_mr_survey_quiz_generate_csv($_, $id) {
         $row[] = $result['status'];
 
         $sections = unserialize_to_array( $result["sections"] );
-        if (!$sections) { $sections = []; }
+        if (!$sections) { $sections = array(); }
         foreach( $sectionsTemplate as $sectionId => $sectionTemplate ) {
 
             $section = getByItemId( $sections, $sectionId );
-            $answers = $section === FALSE ? [] : $section["answers"];
+            $answers = $section === FALSE ? array() : $section["answers"];
 
             foreach( $sectionTemplate as $questionId ) {
                 $row[] = isset( $answers[$questionId]["given"][0] ) ? choiceToLetter( $answers[$questionId]["given"][0] ) : "";
@@ -90,7 +91,7 @@ function wpsqt_mr_survey_quiz_generate_csv($_, $id) {
         $rows[] = $row;
     }
 
-    return array_map( "lineToStrLine", array_merge( [$headers], $rows ) );
+    return array_map( "lineToStrLine", array_merge( array($headers), $rows ) );
 }
 
 function unserialize_to_array( $str ) {
