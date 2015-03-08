@@ -9,31 +9,29 @@
  * To add instructions to quizes and/or surveys this plugin uses the "wpsqt_quiz_form" action 
  * provided by the WPSQT plugin.
  *
- * To install this plugin you need to edit this file. When WPSQT is installed you can then edit this file
- * and uncomment the CREATE TABLE IF NOT EXISTS code/SQL below. The way the installation is done is stupid
- * and should be fixed.
- *
- * installation should be similar to this tutorial:
- * https://codex.wordpress.org/Creating_Tables_with_Plugins
- *
  * FIXME - delete should be HTTP POST and not HTTP GET
- * TODO - proper installation (see link above)
  */
 
 global $wpdb;
-/* Uncomment HERE to install.
-$wpdb->query("CREATE TABLE IF NOT EXISTS `". $wpdb->get_blog_prefix() . "wp_wpqst_mr_survey_quiz_instructions` (
-				  `id` int(11) NOT NULL AUTO_INCREMENT,
-				  `name` varchar(512) NOT NULL,
-				  `type` varchar(266) NOT NULL,
-				  `instructions` text NOT NULL,
-				  PRIMARY KEY (`id`)
-				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
-*/				
+
+function wpsqt_mr_survey_quiz_instructions_install() {
+
+	global $wpdb;
+
+	$wpdb->query("CREATE TABLE IF NOT EXISTS `". $wpdb->get_blog_prefix() . "wp_wpqst_mr_survey_quiz_instructions` (
+					  `id` int(11) NOT NULL AUTO_INCREMENT,
+					  `name` varchar(512) NOT NULL,
+					  `type` varchar(266) NOT NULL,
+					  `instructions` text NOT NULL,
+					  PRIMARY KEY (`id`)
+					) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+};
 
 define('WPSQT_MR_SQ_INS_TABLE', $wpdb->get_blog_prefix() . 'wp_wpqst_mr_survey_quiz_instructions');
 define('WPSQT_PAGE_SQ_INS', WPSQT_PAGE_MAIN.'-mr-survey-quiz-instructions');
 define('WPSQT_URL_SQ_INS', admin_url('admin.php?page='.WPSQT_PAGE_SQ_INS));
+
+add_action('wpsqt_main_install', 'wpsqt_mr_survey_quiz_instructions_install');
 
 add_action('plugins_loaded', 'wpqst_mr_plugins_loaded');
 add_action('admin_init', 'wpqst_mr_admin_init');

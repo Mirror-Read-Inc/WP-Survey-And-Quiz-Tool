@@ -164,6 +164,8 @@ function wpsqt_main_install(){
 				  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 				  PRIMARY KEY (`id`)
 				) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;");
+
+	do_action("wpsqt_main_install");
 }
 if (is_admin()){
 	if (is_multisite() && get_option('wpsqt_manual') != 1) {

@@ -4,3 +4,4 @@ lang/po
 Vagrantfile
 .vagrant
 scripts/*
+.idea
